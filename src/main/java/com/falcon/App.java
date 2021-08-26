@@ -1,24 +1,13 @@
 package com.falcon;
 
 import javax.swing.*;
-import javax.script.*;
-
-import java.awt.Cursor;
-
-import java.awt.Color;
-import java.awt.Font;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
-import com.falcon.Evaluate;
+import java.awt.*;
 
 public class App {
     public static void main(String[] args) {
 
-        JLabel title = new JLabel("<HTML><CENTER><U>FALCON <BR> CALCULATOR</U></CENTER></HTML>");
         JFrame frame = new JFrame("Falcon Calculator");
+        JLabel title = new JLabel("<HTML><CENTER><U>FALCON <BR> CALCULATOR</U></CENTER></HTML>");
         JTextField textField = new JTextField();
         JButton btn1 = new JButton("1");
         JButton btn2 = new JButton("2");
@@ -33,14 +22,14 @@ public class App {
         JButton btn0 = new JButton("0");
         JButton btnClr = new JButton("C");
         JButton btnEq = new JButton("=");
-        JButton btnX = new JButton("D");
+        JButton btnDel = new JButton("D");
         JButton btnAdd = new JButton("+");
         JButton btnSub = new JButton("-");
         JButton btnMul = new JButton("x");
         JButton btnDiv = new JButton("/");
-        JLabel result = new JLabel();
+        JButton btnMode = new JButton();
 
-        title.setBounds(80, 20, 300, 80);
+        title.setBounds(80, 40, 300, 80);
         title.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         title.setFont(new Font("Arial", Font.BOLD, 30));
         title.setForeground(Color.black);
@@ -63,11 +52,12 @@ public class App {
         frame.add(btnMul);
         frame.add(btnDiv);
         frame.add(btnClr);
-        frame.add(btnX);
+        frame.add(btnDel);
         frame.add(btnDot);
         frame.add(btnEq);
-        frame.add(result);
+        frame.add(btnMode);
         frame.setSize(398, 700);
+        frame.getContentPane().setBackground(Color.white);
         frame.setLayout(null);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
@@ -178,12 +168,12 @@ public class App {
             textField.setText(textField.getText().concat("6"));
         });
 
-        btnX.setBounds(280, 320, 60, 60);
-        btnX.setFont(new Font("Arial", Font.BOLD, 32));
-        btnX.setBackground(Color.DARK_GRAY);
-        btnX.setForeground(Color.white);
-        btnX.setFocusable(false);
-        btnX.addActionListener(e -> {
+        btnDel.setBounds(280, 320, 60, 60);
+        btnDel.setFont(new Font("Arial", Font.BOLD, 32));
+        btnDel.setBackground(Color.DARK_GRAY);
+        btnDel.setForeground(Color.white);
+        btnDel.setFocusable(false);
+        btnDel.addActionListener(e -> {
             String string = textField.getText();
             textField.setText("");
             for (int i = 0; i < string.length() - 1; i++) {
@@ -224,7 +214,7 @@ public class App {
         btnEq.setForeground(Color.white);
         btnEq.setFocusable(false);
         btnEq.addActionListener(e -> {
-            textField.setText(evalExpression(textField.getText()));
+            textField.setText(new Evaluate().evalExpression(textField.getText()));
         });
 
         btn0.setBounds(40, 560, 140, 60);
@@ -245,19 +235,20 @@ public class App {
             textField.setText(textField.getText().concat("."));
         });
 
+        btnMode.setBounds(0, 0, 382, 10);
+        btnMode.setFont(new Font("Arial", Font.BOLD, 32));
+        btnMode.setBackground(new Color(23, 23, 23));
+        btnMode.setFocusable(false);
+        btnMode.addActionListener(e -> {
+            if (title.getForeground() == Color.black) {
+                frame.getContentPane().setBackground(Color.black);
+                btnMode.setBackground(Color.white);
+                title.setForeground(Color.white);
+            } else {
+                frame.getContentPane().setBackground(Color.white);
+                btnMode.setBackground(Color.black);
+                title.setForeground(Color.black);
+            }
+        });
     }
-
-    public static String evalExpression(String t) {
-        ScriptEngineManager mgr = new ScriptEngineManager();
-        ScriptEngine engine = mgr.getEngineByName("JavaScript");
-
-        try {
-            return engine.eval(t).toString();
-        } catch (ScriptException e) {
-            e.printStackTrace();
-        }
-
-        return "Error Occured";
-    }
-
 }
