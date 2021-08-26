@@ -11,11 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.falcon.Evaluate;
+
 public class App {
     public static void main(String[] args) {
 
         JLabel title = new JLabel("<HTML><CENTER><U>FALCON <BR> CALCULATOR</U></CENTER></HTML>");
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Falcon Calculator");
         JTextField textField = new JTextField();
         JButton btn1 = new JButton("1");
         JButton btn2 = new JButton("2");
