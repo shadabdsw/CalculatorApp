@@ -1,6 +1,7 @@
 package com.falcon;
 
 import javax.swing.*;
+import javax.script.*;
 
 import java.awt.Cursor;
 
@@ -15,7 +16,7 @@ public class App {
     public static void main(String[] args) {
 
         JLabel title = new JLabel("<HTML><CENTER><U>FALCON <BR> CALCULATOR</U></CENTER></HTML>");
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Falcon Calculator");
         JTextField textField = new JTextField();
         JButton btn1 = new JButton("1");
         JButton btn2 = new JButton("2");
@@ -30,14 +31,12 @@ public class App {
         JButton btn0 = new JButton("0");
         JButton btnClr = new JButton("C");
         JButton btnEq = new JButton("=");
-        JButton btnX = new JButton("X");
+        JButton btnX = new JButton("D");
         JButton btnAdd = new JButton("+");
         JButton btnSub = new JButton("-");
-        JButton btnMul = new JButton("*");
+        JButton btnMul = new JButton("x");
         JButton btnDiv = new JButton("/");
         JLabel result = new JLabel();
-
-        String s = "";
 
         title.setBounds(80, 20, 300, 80);
         title.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -79,7 +78,7 @@ public class App {
 
         btnAdd.setBounds(40, 240, 60, 60);
         btnAdd.setFont(new Font("Arial", Font.BOLD, 32));
-        btnAdd.setBackground(new Color(23, 23, 23));
+        btnAdd.setBackground(Color.DARK_GRAY);
         btnAdd.setForeground(Color.white);
         btnAdd.setFocusable(false);
         btnAdd.addActionListener(e -> {
@@ -88,27 +87,25 @@ public class App {
 
         btnSub.setBounds(120, 240, 60, 60);
         btnSub.setFont(new Font("Arial", Font.BOLD, 38));
-        btnSub.setBackground(new Color(23, 23, 23));
+        btnSub.setBackground(Color.DARK_GRAY);
         btnSub.setForeground(Color.white);
         btnSub.setFocusable(false);
         btnSub.addActionListener(e -> {
             textField.setText(textField.getText().concat("-"));
-
         });
 
         btnMul.setBounds(200, 240, 60, 60);
-        btnMul.setFont(new Font("Arial", Font.BOLD, 38));
-        btnMul.setBackground(new Color(23, 23, 23));
+        btnMul.setFont(new Font("Arial", Font.BOLD, 32));
+        btnMul.setBackground(Color.DARK_GRAY);
         btnMul.setForeground(Color.white);
         btnMul.setFocusable(false);
         btnMul.addActionListener(e -> {
             textField.setText(textField.getText().concat("*"));
-
         });
 
         btnDiv.setBounds(280, 240, 60, 60);
         btnDiv.setFont(new Font("Arial", Font.BOLD, 32));
-        btnDiv.setBackground(new Color(23, 23, 23));
+        btnDiv.setBackground(Color.DARK_GRAY);
         btnDiv.setForeground(Color.white);
         btnDiv.setFocusable(false);
         btnDiv.addActionListener(e -> {
@@ -145,7 +142,7 @@ public class App {
 
         btnClr.setBounds(280, 400, 60, 60);
         btnClr.setFont(new Font("Arial", Font.BOLD, 32));
-        btnClr.setBackground(new Color(23, 23, 23));
+        btnClr.setBackground(Color.DARK_GRAY);
         btnClr.setForeground(Color.white);
         btnClr.setFocusable(false);
         btnClr.addActionListener(e -> {
@@ -181,14 +178,14 @@ public class App {
 
         btnX.setBounds(280, 320, 60, 60);
         btnX.setFont(new Font("Arial", Font.BOLD, 32));
-        btnX.setBackground(new Color(23, 23, 23));
+        btnX.setBackground(Color.DARK_GRAY);
         btnX.setForeground(Color.white);
         btnX.setFocusable(false);
         btnX.addActionListener(e -> {
             String string = textField.getText();
             textField.setText("");
-            for(int i=0; i<string.length()-1;i++){
-                textField.setText(textField.getText()+string.charAt(i));
+            for (int i = 0; i < string.length() - 1; i++) {
+                textField.setText(textField.getText() + string.charAt(i));
             }
         });
 
@@ -221,11 +218,11 @@ public class App {
 
         btnEq.setBounds(280, 480, 60, 140);
         btnEq.setFont(new Font("Arial", Font.BOLD, 32));
-        btnEq.setBackground(new Color(23, 23, 23));
+        btnEq.setBackground(Color.DARK_GRAY);
         btnEq.setForeground(Color.white);
         btnEq.setFocusable(false);
         btnEq.addActionListener(e -> {
-            // textField.setText("");
+            textField.setText(evalExpression(textField.getText()));
         });
 
         btn0.setBounds(40, 560, 140, 60);
@@ -246,18 +243,19 @@ public class App {
             textField.setText(textField.getText().concat("."));
         });
 
-        // result.setBounds(180, 320, 300, 80);
-        // result.setText("Result");
-        // result.setFont(new Font("Arial", Font.BOLD, 28));
-        // result.setForeground(Color.black);
-        // result.setLayout(null);
+    }
 
-        // String text1, text2;
-        // text1 = textField1.getText();
-        // text2 = textField2.getText();
-        // int num1 = Integer.parseInt(text1);
-        // int num2 = Integer.parseInt(text2);
+    public static String evalExpression(String t) {
+        ScriptEngineManager mgr = new ScriptEngineManager();
+        ScriptEngine engine = mgr.getEngineByName("JavaScript");
 
+        try {
+            return engine.eval(t).toString();
+        } catch (ScriptException e) {
+            e.printStackTrace();
+        }
+
+        return "Error Occured";
     }
 
 }
