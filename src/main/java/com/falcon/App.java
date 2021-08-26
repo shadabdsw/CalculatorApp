@@ -83,7 +83,7 @@ public class App {
         btnAdd.setForeground(Color.white);
         btnAdd.setFocusable(false);
         btnAdd.addActionListener(e -> {
-            textField.setText("+");
+            textField.setText(textField.getText().concat("+"));
         });
 
         btnSub.setBounds(120, 240, 60, 60);
@@ -92,7 +92,8 @@ public class App {
         btnSub.setForeground(Color.white);
         btnSub.setFocusable(false);
         btnSub.addActionListener(e -> {
-            textField.setText("-");
+            textField.setText(textField.getText().concat("-"));
+
         });
 
         btnMul.setBounds(200, 240, 60, 60);
@@ -101,7 +102,8 @@ public class App {
         btnMul.setForeground(Color.white);
         btnMul.setFocusable(false);
         btnMul.addActionListener(e -> {
-            textField.setText("*");
+            textField.setText(textField.getText().concat("*"));
+
         });
 
         btnDiv.setBounds(280, 240, 60, 60);
@@ -110,7 +112,7 @@ public class App {
         btnDiv.setForeground(Color.white);
         btnDiv.setFocusable(false);
         btnDiv.addActionListener(e -> {
-            textField.setText("/");
+            textField.setText(textField.getText().concat("/"));
         });
 
         btn7.setBounds(40, 320, 60, 60);
@@ -119,7 +121,7 @@ public class App {
         btn7.setForeground(Color.white);
         btn7.setFocusable(false);
         btn7.addActionListener(e -> {
-            textField.setText("7");
+            textField.setText(textField.getText().concat("7"));
         });
 
         btn8.setBounds(120, 320, 60, 60);
@@ -128,7 +130,8 @@ public class App {
         btn8.setForeground(Color.white);
         btn8.setFocusable(false);
         btn8.addActionListener(e -> {
-            textField.setText("8");
+            textField.setText(textField.getText().concat("8"));
+
         });
 
         btn9.setBounds(200, 320, 60, 60);
@@ -137,7 +140,7 @@ public class App {
         btn9.setForeground(Color.white);
         btn9.setFocusable(false);
         btn9.addActionListener(e -> {
-            textField.setText("9");
+            textField.setText(textField.getText().concat("9"));
         });
 
         btnClr.setBounds(280, 400, 60, 60);
@@ -155,7 +158,7 @@ public class App {
         btn4.setForeground(Color.white);
         btn4.setFocusable(false);
         btn4.addActionListener(e -> {
-            textField.setText("4");
+            textField.setText(textField.getText().concat("4"));
         });
 
         btn5.setBounds(120, 400, 60, 60);
@@ -164,7 +167,7 @@ public class App {
         btn5.setForeground(Color.white);
         btn5.setFocusable(false);
         btn5.addActionListener(e -> {
-            textField.setText("5");
+            textField.setText(textField.getText().concat("5"));
         });
 
         btn6.setBounds(200, 400, 60, 60);
@@ -173,7 +176,7 @@ public class App {
         btn6.setForeground(Color.white);
         btn6.setFocusable(false);
         btn6.addActionListener(e -> {
-            textField.setText("6");
+            textField.setText(textField.getText().concat("6"));
         });
 
         btnX.setBounds(280, 320, 60, 60);
@@ -182,7 +185,11 @@ public class App {
         btnX.setForeground(Color.white);
         btnX.setFocusable(false);
         btnX.addActionListener(e -> {
-            // textField.setText("");
+            String string = textField.getText();
+            textField.setText("");
+            for(int i=0; i<string.length()-1;i++){
+                textField.setText(textField.getText()+string.charAt(i));
+            }
         });
 
         btn1.setBounds(40, 480, 60, 60);
@@ -191,7 +198,7 @@ public class App {
         btn1.setForeground(Color.white);
         btn1.setFocusable(false);
         btn1.addActionListener(e -> {
-            textField.setText("1");
+            textField.setText(textField.getText().concat("1"));
         });
 
         btn2.setBounds(120, 480, 60, 60);
@@ -200,7 +207,7 @@ public class App {
         btn2.setForeground(Color.white);
         btn2.setFocusable(false);
         btn2.addActionListener(e -> {
-            textField.setText("2");
+            textField.setText(textField.getText().concat("2"));
         });
 
         btn3.setBounds(200, 480, 60, 60);
@@ -209,7 +216,7 @@ public class App {
         btn3.setForeground(Color.white);
         btn3.setFocusable(false);
         btn3.addActionListener(e -> {
-            textField.setText("3");
+            textField.setText(textField.getText().concat("3"));
         });
 
         btnEq.setBounds(280, 480, 60, 140);
@@ -227,7 +234,7 @@ public class App {
         btn0.setForeground(Color.white);
         btn0.setFocusable(false);
         btn0.addActionListener(e -> {
-            textField.setText("0");
+            textField.setText(textField.getText().concat("0"));
         });
 
         btnDot.setBounds(200, 560, 60, 60);
@@ -236,7 +243,7 @@ public class App {
         btnDot.setForeground(Color.white);
         btnDot.setFocusable(false);
         btnDot.addActionListener(e -> {
-            textField.setText(".");
+            textField.setText(textField.getText().concat("."));
         });
 
         // result.setBounds(180, 320, 300, 80);
